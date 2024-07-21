@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #212121;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .highlight {
+            background-color: yellow;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title" style="background-color: orange;">Day 9: DOM Manipulation</h1>
+    <button onclick="addClass()">Add Highlight Class</button>
+
+    <p id="content">I am doing 30DaysJavascript challange</p>
+    <ul id="myList">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+    </ul>
+    <h2 id="toRemove">Remove it from here</h2>
+    <img id="myImage" src="https://cdn.pixabay.com/photo/2023/08/19/13/42/flowers-8200510_1280.jpg" alt="image 1"
+        width="400">
+
+    <p id="myParagraph">Original text content.</p>
+    <button id="changeTextButton">Change Text</button>
+
+
+</body>
+<script>
+    // 1. Selecting and manipulating Elements
+    const text = document.getElementById('content');
+    text.innerHTML = 'I am doing 30DaysJavascriptChallange from Chaicode platform';
+
+    document.querySelector('.title').style.backgroundColor = 'red';
+
+    // Creating and appending elements
+    const newDiv = document.createElement('div');
+    const textContent = document.createTextNode('New div element - with text content');
+    newDiv.appendChild(textContent);
+    document.body.appendChild(newDiv);
+
+    const newListItem = document.createElement('li');
+    const listContent = document.createTextNode("New list item added");
+    newListItem.appendChild(listContent);
+    const ul = document.querySelector('#myList');
+    ul.appendChild(newListItem);
+
+    // Removing elements
+    function removeElement() {
+        const element = document.getElementById('toRemove');
+        element.remove();
+    }
+    removeElement();
+
+    function removeLastChild() {
+        const ul = document.getElementById('myList');
+        const lastChild = ul.lastElementChild;
+        if (lastChild) {
+            ul.removeChild(lastChild);
+        }
+    }
+    removeLastChild();
+
+    // 4. Modifying attributes and classes
+    const image = document.getElementById('myImage');
+    image.src = 'https://cdn.pixabay.com/photo/2024/06/17/23/30/trees-8836655_960_720.jpg';
+
+    function addClass() {
+        const element = document.querySelector('.title'); // Select by class
+        element.classList.add('highlight');
+    }
+    addClass();
+
+
+    //5. Event Handling
+
+    const btn = document.getElementById('changeTextButton');
+    btn.addEventListener('click', function () {
+        document.getElementById('myParagraph').innerHTML = "Chnaged!"
+    });
+
+    document.querySelector('.title').addEventListener('mouseover', function () {
+        this.style.backgroundColor = 'green';
+    });
+
+</script>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #414141;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title" style="background-color: green; padding: 5px 8px 5px 8px">EVENT HANDLING</h1>
+    <p id="text">Click button to change this paragraph</p>
+    <button class="btn">Click here</button>
+    <img src="https://cdn.pixabay.com/photo/2015/02/15/03/04/japanese-umbrellas-636870_960_720.jpg" alt="" class="myImage" width="300" style=" margin: 15px;">
+
+    <input type="text" id="inputField" placeholder="Press any key">
+
+    <select id="mySelect" style="margin: 15px;">
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+    </select>
+    <p id="selectedValue">Selected value will appear here</p>
+
+    <ul id="myList">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    
+    <button id="addButton">Add Item</button>
+    <ul id="myList2">
+        <!-- Dynamically added items will appear here -->
+    </ul>
+</body>
+<script>
+    //1.Basic Event Handling
+    const btn = document.querySelector('.btn');
+    function changePara(){
+        document.getElementById('text').innerHTML = 'Paragraph changed';
+    }
+
+    btn.addEventListener('click', changePara);
+    
+
+    //add a double-click event listner to an image that toggles its visibility
+    const image = document.querySelector('.myImage');
+    image.addEventListener('dblclick', function(){
+        if(image.style.display === 'none'){
+            image.style.display = 'block';
+        }else{
+            image.style.display = 'none';
+        }
+    });
+
+    //2. Mouse Events
+    //Add a mouseover event listener to an element that changes its background color
+
+    const title = document.querySelector('#title');
+    title.addEventListener('mouseover', function(){
+        title.style.backgroundColor = "orange";
+    })
+    
+    //resets its bgc
+    title.addEventListener('mouseout', ()=>{
+        title.style.backgroundColor = 'green';
+    })
+    
+    //3.Keyboard Events
+    //Add a keydown event listener  to an ipput that logs the key pressed to the console
+    const inputField = document.querySelector('#inputField');
+
+    inputField.addEventListener('keydown', function(event) {
+        console.log(`Key pressed: ${event.key}`);
+    });
+    
+    //add a keyup event listener to a select dropdown that displays the selected value in a paragraph
+    const selectElement = document.querySelector('#mySelect');
+    const paragraph = document.querySelector('#selectedValue');
+
+    selectElement.addEventListener('change', function(){
+        paragraph.textContent  = `selected value: ${selectElement.value}`;
+    });
+
+    //Event Delegation 
+
+    //add a click event listener to a list that logs the text content of a the clicked list item using event delegation.
+    
+    const list = document.querySelector('#myList');
+
+    list.addEventListener('click', function(event) {
+        // console.log (event)
+        if (event.target.tagName === 'LI') {
+            console.log(`Clicked item text: ${event.target.textContent}`);
+        }
+    });
+    
+    //add a event listener to parent element that listens for events from dynamically added child elements
+    const list2 = document.querySelector('#myList2');
+    const addButton = document.querySelector('#addButton');
+
+    // Event delegation: handle clicks on list items
+    list2.addEventListener('click', function(event) {
+        if (event.target.tagName === 'LI') {
+            console.log(`Clicked item text: ${event.target.textContent}`);
+        }
+    });
+
+    // Add a new list item when the button is clicked
+    addButton.addEventListener('click', function() {
+        const newItem = document.createElement('li');
+        newItem.textContent = `Item ${list2.children.length + 1}`;
+        list2.appendChild(newItem);
+    });
+
+</script>
+</html>

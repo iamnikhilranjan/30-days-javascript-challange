@@ -102,22 +102,3 @@ console.log(p1.fullName);
 
 p1.fullName = 'Nikhil Ranjan';
 console.log(p1.fullName);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
